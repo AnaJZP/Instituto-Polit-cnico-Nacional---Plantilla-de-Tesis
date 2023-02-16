@@ -1,0 +1,132 @@
+\documentclass[12pt,letterpaper,oneside]{report}
+%Puedes verificar todas las especificaciones de este documento en thesis.sty
+\usepackage{thesis}
+  
+  
+\usepackage{atbegshi}
+\AtBeginDocument{\AtBeginShipoutNext{\AtBeginShipoutDiscard}}
+
+
+
+
+\begin{document}
+
+\include{Portada}
+
+\normalsize
+
+
+%AGREGA CAPÍTULOS E ÍNDICE
+
+
+
+\pagenumbering{roman}
+\normalsize
+
+\chapter*{\centerline{AGRADECIMIENTOS}}\label{chapter:agradecimientos}
+%\setcounter{page}{0}
+\pagenumbering{roman}
+\input{Capítulos/Agradecimientos}
+\pagebreak
+
+\phantomsection
+\setcounter{tocdepth}{2}    % Sets maximum depth of Table Of Contents
+\renewcommand{\contentsname}{INDICE}
+\tableofcontents
+
+\renewcommand{\listfigurename}{ÍNDICE DE FIGURAS}
+\renewcommand{\listtablename}{ÍNDICE DE TABLAS}
+
+\clearpage \phantomsection
+\addcontentsline{toc}{chapter}{\listfigurename}
+\listoffigures
+\pagebreak
+
+
+\clearpage \phantomsection
+\addcontentsline{toc}{chapter}{\listtablename}
+\listoftables
+\pagebreak
+
+
+\addcontentsline{toc}{chapter}{GLOSARIO}
+\chapter*{\centerline{GLOSARIO}}\label{chapter:GLOSARIO}
+\input{Capítulos/GLOSARIO}
+\pagebreak
+
+
+
+\addcontentsline{toc}{chapter}{ABREVIACIONES}
+\chapter*{\centerline{ABREVIACIONES}}\label{chapter:ABREVIACIONES}
+%\setcounter{page}{0}
+%\renewcommand{\thechapter}{\roman{chapter}}
+\input{Capítulos/ABREVIACIONES}
+\pagebreak
+
+\addcontentsline{toc}{chapter}{RESUMEN}
+\chapter*{\centerline{RESUMEN}}\label{chapter:RESUMEN}
+%\setcounter{page}{0}
+%\renewcommand{\thechapter}{\roman{chapter}}
+\input{Capítulos/RESUMEN}
+\pagebreak
+
+\addcontentsline{toc}{chapter}{ABSTRACT}
+\chapter*{\centerline{ABSTRACT}}\label{chapter:Abstract}
+%\setcounter{page}{0}
+%\renewcommand{\thechapter}{\roman{chapter}}
+\input{Capítulos/ABSTRACT}
+\pagebreak
+
+\addcontentsline{toc}{chapter}{INTRODUCCIÓN}
+\chapter*{INTRODUCCIÓN}\label{chapter:Introducción}
+%\onehalfspacing
+\setcounter{page}{0}
+\pagenumbering{arabic}
+\input{Capítulos/Introducción}
+\pagebreak
+
+
+\addcontentsline{toc}{chapter}{CAPÍTULO 1. AÑADE CAPÍTULOS Y SUBCAPÍTULOS}
+\chapter*{CAPÍTULO 1. CAPÍTULOS Y SUBCAPÍTULOS}\label{chapter:Capítulo1}
+\onehalfspacing
+%\setcounter{page}{0}
+%\pagenumbering{arabic}
+\input{Capítulos/Capitulo1.tex}
+
+\addcontentsline{toc}{chapter}{CAPÍTULO 2. AÑADE ECUACIONES, FIGURAS Y TABLAS}
+\chapter*{CAPÍTULO 2. ECUACIONES, FIGURAS Y TABLAS}\label{chapter:Capítulo2}
+\setcounter{chapter}{2}
+\setcounter{section}{0}
+\onehalfspacing
+%\setcounter{page}{0}
+%\pagenumbering{arabic}
+\input{Capítulos/Capitulo2}
+
+\addcontentsline{toc}{chapter}{CAPÍTULO 3. CITAR CORRECTAMENTE}
+\chapter*{CAPÍTULO 3. CITAR CORRECTAMENTE}\label{chapter:Capítulo3}
+\setcounter{chapter}{3}
+\setcounter{section}{0}
+\onehalfspacing
+%\setcounter{page}{0}
+%\pagenumbering{arabic}
+\input{Capítulos/Capitulo3}
+
+\addcontentsline{toc}{chapter}{CONCLUSIONES}
+\chapter*{CONCLUSIONES}\label{chapter:Conclusiones}
+%\setcounter{page}{0}
+\input{Capítulos/Conclusiones}
+
+
+
+
+
+%\chapter*{REFERENCIAS}
+\printbibliography[title={REFERENCIAS}]
+\addcontentsline{toc}{chapter}{REFERENCIAS}
+%\chapter*{\centerline{REFERENCIAS}}\label{chapter:referencias}
+
+%\input{Referencias}
+%\bibliographystyle{}
+
+\pagebreak
+\end{document} 

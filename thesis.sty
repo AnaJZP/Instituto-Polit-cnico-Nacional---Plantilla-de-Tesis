@@ -1,0 +1,93 @@
+%%%%%  ESTRUCTURA DEL DOCUMENTO %%%%%
+
+\ProvidesPackage{thesis} %Paquete para formato de thesis
+\usepackage{scrextend} %Uso de componentes de KOMA-Script
+\usepackage{graphicx} %Soporte mejorado para gráficos
+\usepackage{wrapfig} % Envuelve las imágenes correctamente alrededor del texto
+\usepackage[dvipsnames]{xcolor} %Incorpora color al texto
+\usepackage[letter, top=25mm, bottom=25mm, left=30mm, right=30mm]{geometry} %Manipula los márgenes
+\usepackage[spanish,mexico]{babel} %Utiliza como lenguaje español de México
+\usepackage{longtable} %Crea tablas que abarquen varias páginas
+\usepackage{multirow} %Permite combinar filas en tablas
+\usepackage{todonotes} %Permite añadir notas en las figuras 
+\usepackage[hidelinks]{hyperref} %Hace que los enlaces se puedan hacer clic
+\usepackage{float} %Mejora el posicionamieno de tablas y figuras
+\usepackage{blindtext} %Incorpora ecuaciones de manera simple en el texto
+\usepackage{chngcntr}\counterwithout{table}{chapter} %Resetea contadores.
+\counterwithout{figure}{chapter}                    %
+\usepackage[T2A,T1]{fontenc} %Incorpora componentes cirílicos en el texto
+\usepackage[utf8]{inputenc} %Incorpora símbolos universales
+\usepackage{amssymb} %Mejora el acomodo de itemize 
+\renewcommand{\labelitemi}{\tiny$\blacksquare$} %Mejor formato de itemize
+\usepackage{caption} %Incorpora figuras ajustadas al documento
+\captionsetup{labelsep=period} %Etiquetas
+\usepackage{verbatimbox}  %Genera bloques en el documento
+\usepackage{amsmath,bm}  %Para las ecuaciones
+\usepackage{threeparttable} %Notas para las tablas
+\usepackage{sectsty} %Permite cambiar las fuentes del documentos
+
+% Formato de citas
+\usepackage{csquotes}  
+\usepackage[backend=biber,style=apa,citestyle=authoryear,maxcitenames=3]{biblatex}
+\addbibresource{referencias.bib}
+\renewcommand\bibname{REFERENCIAS}
+%\usepackage{biblatex}
+%\usepackage[options]{natbib}
+%\usepackage[natbibapa]{apacite}
+%\newrobustcmd*{\setmaxcitenames}{\numdef\blx@maxcitenames}
+%\DefineBibliographyStrings{spanish}{andothers={\&~al\adddot}}
+%\DeclareLanguageMapping{spanish}{spanish-apa}
+%\usepackage[spanish=mexican]{csquotes}                        
+
+ % Formato para la correcta separación de los enunciados
+\emergencystretch=1em                               % 
+\usepackage[final]{microtype}                       % 
+\usepackage{times}                                  %
+\setlength{\parindent}{0cm}                         %
+\usepackage{setspace}                               %
+\onehalfspace                                       %
+\setlength{\parskip}{\baselineskip}                 %
+\newcounter{ltrow}                                  %
+\usepackage{listings}                               %
+\usepackage{needspace}                              % 
+
+% Formato de capítulos y subcapítulos
+\usepackage{titlesec}                                          
+\titleformat{\chapter}{\normalfont\Large\bfseries}{\thechapter.}{1em}{}                         %
+\titlespacing*{\chapter}{pt}{0pt}{0pt} 
+\titlespacing*{\section}{0pt}{0pt}{0pt}   
+%\renewcommand\thesection{\arabic{section}}
+\titlespacing*{\subsection}{0pt}{0pt}{0pt}     
+%\renewcommand\thesubsection{\arabic{section}}%
+\titlespacing*{\subsubsection}{0pt}{0pt}{-10pt}                
+\titleformat{\section}[hang]{\normalfont\large\bf}{\thesection}{1em}{}[]                        %
+\titleformat{\subsection}[hang]{\normalfont\large\bf}{\thesubsection}{1em}{}[]                  %
+\titleformat{\subsubsection}[hang]{\normalfont\normalsize\bf}{\thesubsubsection}{1em}{}[]       %
+\renewcommand{\thesection}{\thechapter.\number\numexpr\value{section}\relax}
+\renewcommand{\thesubsection}{\thesection.\number\numexpr\value{subsection}\relax}
+\renewcommand{\thesubsubsection}{\thesubsection.\number\numexpr\value{subsubsection}\relax}
+\setcounter{secnumdepth}{3}
+\setcounter{chapter}{1}%
+
+% Espaciados entre listas
+\usepackage{enumitem}                                       % 
+\setlist[itemize]{noitemsep, topsep=0pt}                    %
+\setlist[enumerate]{noitemsep, topsep=0pt}                  %
+
+% Formato para índice
+\usepackage{tocloft}                                        % 
+\renewcommand{\cfttoctitlefont}{\hfill\Large\bfseries}      %
+\renewcommand{\cftloftitlefont}{\hfill\Large\bfseries}      %
+\renewcommand{\cftlottitlefont}{\hfill\Large\bfseries}      %
+\renewcommand{\cftaftertoctitle}{\hfill\hfill}              %
+\renewcommand{\cftafterloftitle}{\hfill}                    %
+\renewcommand{\cftafterlottitle}{\hfill}                    %
+\setlength{\cftbeforetoctitleskip}{0em}                     %
+\setlength{\cftbeforeloftitleskip}{0em}                     %
+\setlength{\cftbeforelottitleskip}{0em}                     %
+\usepackage{subcaption}
+
+%Ecuaciones
+\renewcommand\theequation{\arabic{equation}}
+%\renewcommand\theequation{\thesection.\arabic{equation}}
+\usepackage{array, booktabs, makecell}
