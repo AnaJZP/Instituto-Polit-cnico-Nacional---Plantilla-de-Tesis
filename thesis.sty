@@ -1,93 +1,125 @@
-%%%%%  ESTRUCTURA DEL DOCUMENTO %%%%%
+%%%%%  ESTRUCTURA DEL DOCUMENTO  %%%%%
+% Formato de tesis IPN · SEPI-ESE con estilo APA 7.
+% Es el mismo formato de la plantilla de Word y de la guía:
+% https://anajzp.github.io/seminario-iii-guia-tesis/
 
-\ProvidesPackage{thesis} %Paquete para formato de thesis
-\usepackage{scrextend} %Uso de componentes de KOMA-Script
-\usepackage{graphicx} %Soporte mejorado para gráficos
-\usepackage{wrapfig} % Envuelve las imágenes correctamente alrededor del texto
-\usepackage[dvipsnames]{xcolor} %Incorpora color al texto
-\usepackage[letter, top=25mm, bottom=25mm, left=30mm, right=30mm]{geometry} %Manipula los márgenes
-\usepackage[spanish,mexico]{babel} %Utiliza como lenguaje español de México
-\usepackage{longtable} %Crea tablas que abarquen varias páginas
-\usepackage{multirow} %Permite combinar filas en tablas
-\usepackage{todonotes} %Permite añadir notas en las figuras 
-\usepackage[hidelinks]{hyperref} %Hace que los enlaces se puedan hacer clic
-\usepackage{float} %Mejora el posicionamieno de tablas y figuras
-\usepackage{blindtext} %Incorpora ecuaciones de manera simple en el texto
-\usepackage{chngcntr}\counterwithout{table}{chapter} %Resetea contadores.
-\counterwithout{figure}{chapter}                    %
-\usepackage[T2A,T1]{fontenc} %Incorpora componentes cirílicos en el texto
-\usepackage[utf8]{inputenc} %Incorpora símbolos universales
-\usepackage{amssymb} %Mejora el acomodo de itemize 
-\renewcommand{\labelitemi}{\tiny$\blacksquare$} %Mejor formato de itemize
-\usepackage{caption} %Incorpora figuras ajustadas al documento
-\captionsetup{labelsep=period} %Etiquetas
-\usepackage{verbatimbox}  %Genera bloques en el documento
-\usepackage{amsmath,bm}  %Para las ecuaciones
-\usepackage{threeparttable} %Notas para las tablas
-\usepackage{sectsty} %Permite cambiar las fuentes del documentos
+\ProvidesPackage{thesis}
 
-% Formato de citas
-\usepackage{csquotes}  
-\usepackage[backend=biber,style=apa,citestyle=authoryear,maxcitenames=3]{biblatex}
-\addbibresource{referencias.bib}
-\renewcommand\bibname{REFERENCIAS}
-%\usepackage{biblatex}
-%\usepackage[options]{natbib}
-%\usepackage[natbibapa]{apacite}
-%\newrobustcmd*{\setmaxcitenames}{\numdef\blx@maxcitenames}
-%\DefineBibliographyStrings{spanish}{andothers={\&~al\adddot}}
-%\DeclareLanguageMapping{spanish}{spanish-apa}
-%\usepackage[spanish=mexican]{csquotes}                        
+% ---------- Idioma, codificación y letra ----------
+\usepackage[T1]{fontenc}                      % Acentos y caracteres especiales
+\usepackage[utf8]{inputenc}                   % Archivos en UTF-8
+\usepackage[spanish,mexico]{babel}            % Español de México («Tabla», «Capítulo»)
+\usepackage{mathptmx}                         % Times en texto y ecuaciones
+\usepackage[final]{microtype}                 % Mejor justificación del texto
+\emergencystretch=1em
 
- % Formato para la correcta separación de los enunciados
-\emergencystretch=1em                               % 
-\usepackage[final]{microtype}                       % 
-\usepackage{times}                                  %
-\setlength{\parindent}{0cm}                         %
-\usepackage{setspace}                               %
-\onehalfspace                                       %
-\setlength{\parskip}{\baselineskip}                 %
-\newcounter{ltrow}                                  %
-\usepackage{listings}                               %
-\usepackage{needspace}                              % 
+% ---------- Página: carta, márgenes 2.5 cm (sup./inf.) y 3 cm (izq./der.) ----------
+\usepackage[letterpaper, top=25mm, bottom=25mm, left=30mm, right=30mm]{geometry}
 
-% Formato de capítulos y subcapítulos
-\usepackage{titlesec}                                          
-\titleformat{\chapter}{\normalfont\Large\bfseries}{\thechapter.}{1em}{}                         %
-\titlespacing*{\chapter}{pt}{0pt}{0pt} 
-\titlespacing*{\section}{0pt}{0pt}{0pt}   
-%\renewcommand\thesection{\arabic{section}}
-\titlespacing*{\subsection}{0pt}{0pt}{0pt}     
-%\renewcommand\thesubsection{\arabic{section}}%
-\titlespacing*{\subsubsection}{0pt}{0pt}{-10pt}                
-\titleformat{\section}[hang]{\normalfont\large\bf}{\thesection}{1em}{}[]                        %
-\titleformat{\subsection}[hang]{\normalfont\large\bf}{\thesubsection}{1em}{}[]                  %
-\titleformat{\subsubsection}[hang]{\normalfont\normalsize\bf}{\thesubsubsection}{1em}{}[]       %
-\renewcommand{\thesection}{\thechapter.\number\numexpr\value{section}\relax}
-\renewcommand{\thesubsection}{\thesection.\number\numexpr\value{subsection}\relax}
-\renewcommand{\thesubsubsection}{\thesubsection.\number\numexpr\value{subsubsection}\relax}
-\setcounter{secnumdepth}{3}
-\setcounter{chapter}{1}%
+% ---------- Interlineado 1.5, sin sangría, espacio entre párrafos ----------
+\usepackage{setspace}
+\onehalfspacing
+\setlength{\parindent}{0cm}
+\setlength{\parskip}{0.6\baselineskip}
 
-% Espaciados entre listas
-\usepackage{enumitem}                                       % 
-\setlist[itemize]{noitemsep, topsep=0pt}                    %
-\setlist[enumerate]{noitemsep, topsep=0pt}                  %
+% ---------- Paquetes generales ----------
+\usepackage{graphicx}                         % Imágenes
+\usepackage[dvipsnames]{xcolor}               % Colores
+\usepackage{float}                            % Posición de tablas y figuras ([H])
+\usepackage{array, booktabs, multirow, makecell, longtable}  % Tablas
+\usepackage{pdflscape}                        % Páginas horizontales para tablas anchas
+\usepackage{amsmath, amssymb, bm}             % Ecuaciones
+\usepackage{enumitem}                         % Listas
+\setlist[itemize]{noitemsep, topsep=0pt}
+\setlist[enumerate]{noitemsep, topsep=0pt}
+\usepackage{pgfplots}                         % Gráficas hechas en LaTeX (editables)
+\pgfplotsset{compat=1.18}
+\usepackage[most]{tcolorbox}                  % Recuadros de guía
+\usepackage{pdfpages}                         % Insertar PDF de las actas firmadas: \includepdf{archivo.pdf}
+\usepackage{url}
+\usepackage[hidelinks]{hyperref}              % Enlaces en el índice y en las citas
 
-% Formato para índice
-\usepackage{tocloft}                                        % 
-\renewcommand{\cfttoctitlefont}{\hfill\Large\bfseries}      %
-\renewcommand{\cftloftitlefont}{\hfill\Large\bfseries}      %
-\renewcommand{\cftlottitlefont}{\hfill\Large\bfseries}      %
-\renewcommand{\cftaftertoctitle}{\hfill\hfill}              %
-\renewcommand{\cftafterloftitle}{\hfill}                    %
-\renewcommand{\cftafterlottitle}{\hfill}                    %
-\setlength{\cftbeforetoctitleskip}{0em}                     %
-\setlength{\cftbeforeloftitleskip}{0em}                     %
-\setlength{\cftbeforelottitleskip}{0em}                     %
-\usepackage{subcaption}
+% ---------- Tablas y figuras en formato APA 7 ----------
+% Arriba: «Tabla 1» en negritas y, en el renglón siguiente, el título en cursiva.
+\usepackage{caption}
+\captionsetup{labelfont=bf, textfont=it, labelsep=newline, justification=raggedright,
+              singlelinecheck=false, position=top, skip=4pt, font={stretch=1.1}}
+\usepackage{chngcntr}
+\counterwithout{table}{chapter}               % Tabla 1, 2, 3… en todo el documento
+\counterwithout{figure}{chapter}
+% Nota debajo de tablas y figuras:  \nota{Elaboración propia con datos de…}
+\newcommand{\nota}[1]{\par\vspace{2pt}{\small\setstretch{1}\textit{Nota.} #1\par}}
 
-%Ecuaciones
+% ---------- Ecuaciones numeradas (1), (2)… en todo el documento ----------
+\counterwithout{equation}{chapter}
 \renewcommand\theequation{\arabic{equation}}
-%\renewcommand\theequation{\thesection.\arabic{equation}}
-\usepackage{array, booktabs, makecell}
+
+% ---------- Títulos (niveles APA 7) ----------
+% Nivel 1 (capítulos y apartados): centrado, negritas.  «Capítulo 1. Marco teórico»
+% Nivel 2 (\section): izquierda, negritas, numerado 1.1
+% Nivel 3 (\subsection): izquierda, negritas y cursivas, numerado 1.1.1
+\usepackage{titlesec}
+\titleformat{\chapter}[block]{\normalfont\large\bfseries\centering}{\chaptertitlename~\thechapter.}{0.4em}{}
+\titleformat{name=\chapter,numberless}[block]{\normalfont\large\bfseries\centering}{}{0pt}{}
+\titlespacing*{\chapter}{0pt}{0pt}{1.2\baselineskip}
+\titleformat{\section}[hang]{\normalfont\normalsize\bfseries}{\thesection}{0.6em}{}
+\titleformat{\subsection}[hang]{\normalfont\normalsize\bfseries\itshape}{\thesubsection}{0.6em}{}
+\titlespacing*{\section}{0pt}{1.2\baselineskip}{0.3\baselineskip}
+\titlespacing*{\subsection}{0pt}{1\baselineskip}{0.3\baselineskip}
+\setcounter{secnumdepth}{2}
+
+% ---------- Índices ----------
+\addto\captionsspanish{%
+  \renewcommand{\contentsname}{Índice}%
+  \renewcommand{\listtablename}{Índice de tablas}%
+  \renewcommand{\listfigurename}{Índice de figuras}%
+  \renewcommand{\bibname}{Referencias}%
+  \renewcommand{\tablename}{Tabla}}
+\usepackage{tocloft}
+\renewcommand{\cfttoctitlefont}{\hfill\large\bfseries}
+\renewcommand{\cftaftertoctitle}{\hfill}
+\renewcommand{\cftlottitlefont}{\hfill\large\bfseries}
+\renewcommand{\cftafterlottitle}{\hfill}
+\renewcommand{\cftloftitlefont}{\hfill\large\bfseries}
+\renewcommand{\cftafterloftitle}{\hfill}
+\setlength{\cftbeforetoctitleskip}{0pt}
+\setlength{\cftbeforelottitleskip}{0pt}
+\setlength{\cftbeforeloftitleskip}{0pt}
+\renewcommand{\cftchapleader}{\cftdotfill{\cftdotsep}}
+\renewcommand{\cftchappresnum}{\chaptername~}
+\renewcommand{\cftchapaftersnum}{.}
+\settowidth{\cftchapnumwidth}{\bfseries\chaptername~9.\quad}
+\renewcommand{\cfttabpresnum}{\bfseries Tabla~}
+\renewcommand{\cfttabaftersnum}{.}
+\settowidth{\cfttabnumwidth}{\bfseries Tabla~99.\quad}
+\renewcommand{\cftfigpresnum}{\bfseries Figura~}
+\renewcommand{\cftfigaftersnum}{.}
+\settowidth{\cftfignumwidth}{\bfseries Figura~99.\quad}
+\setlength{\cfttabindent}{0pt}
+\setlength{\cftfigindent}{0pt}
+\setlength{\cftbeforechapskip}{0.5em}
+\setcounter{tocdepth}{2}
+
+% Apartado sin número que sí aparece en el índice:  \apartado{Resumen}
+\newcommand{\apartado}[1]{\clearpage\phantomsection\addcontentsline{toc}{chapter}{#1}\chapter*{#1}}
+
+% Hoja institucional que no va en el índice (actas, carta cesión, dedicatoria…)
+\newcommand{\hojainstitucional}[2]{\clearpage
+  {\centering\large\bfseries #1\par}\vspace{\baselineskip}
+  {\centering\color{gray}\itshape #2\par}}
+
+% ---------- Recuadros de guía (bórralos o desactívalos en tu versión final) ----------
+% Para ocultar TODAS las guías de una vez, escribe \mostrarguiasfalse en Principal.tex.
+\newif\ifmostrarguias \mostrarguiastrue
+\newcommand{\guia}[1]{\ifmostrarguias
+  \begin{tcolorbox}[enhanced, breakable, colback=black!4, colframe=black!4, borderline west={2pt}{0pt}{black!35},
+    sharp corners, boxrule=0pt, left=8pt, right=8pt, top=4pt, bottom=4pt, fontupper=\small\color{black!70}\setstretch{1.15}]
+  \textbf{Guía.} #1
+  \end{tcolorbox}\fi}
+% Etiqueta gris para señalar los elementos de la introducción y las conclusiones
+\newcommand{\etiqueta}[1]{\ifmostrarguias\par{\scriptsize\sffamily\bfseries\color{black!50}\MakeUppercase{#1}}\par\nopagebreak\vspace{-0.6\baselineskip}\fi}
+
+% ---------- Referencias en APA 7 ----------
+\usepackage{csquotes}
+\usepackage[backend=biber, style=apa]{biblatex}
+\addbibresource{referencias.bib}

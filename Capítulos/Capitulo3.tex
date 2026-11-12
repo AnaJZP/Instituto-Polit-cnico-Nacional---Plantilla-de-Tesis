@@ -1,29 +1,98 @@
-\setstretch{2}
-%\setlength{\parindent}{3em}
-\setlength{\parskip}{1em}
+Este capítulo presenta las variables del estudio, la especificación del modelo econométrico y el análisis de los resultados.
 
-\section{Incorporación de citas}
+\guia{El Capítulo 3 presenta la metodología (variables, fuentes y especificación del modelo, con sus ecuaciones) y el análisis de resultados, que se divide en tres apartados: descripción de los resultados, contraste con la literatura y el marco teórico, e implicaciones de política pública o regulación.}
 
-Incorpora las citas, ya sea que cite una idea dentro del texto, por ejemplo.
+\section{Variables y fuentes de información}
 
-El uso de \textit{Machine Learning} ha revolucinado la forma en como se hace valuación financiera \parencite{Moat}.
+\guia{Presenta tus variables en una tabla con su nomenclatura, definición y fuente. Si son demasiadas, agrúpalas y envía el detalle a un anexo.}
 
-O bien, se puede citar como:
+La Tabla~\ref{tab:variables} resume las variables del estudio, su nomenclatura y sus fuentes de información.
 
-De acuerdo con \textcite{Moat}, el uso de \textit{Machine Learning} ha revolucinado la forma en como se hace valuación financiera.
+\begin{table}[H]
+\caption{Variables del estudio y fuentes de información}
+\label{tab:variables}
+\small\setstretch{1.1}
+\begin{tabular}{@{}lp{7.6cm}l@{}}
+\toprule
+Nomenclatura & Variable & Fuente \\
+\midrule
+$\mathit{VOL}_t$ & Volumen mensual de contratos de futuros del dólar (logaritmo) & MexDer \\
+$\sigma_t^{FX}$ & Volatilidad condicional del tipo de cambio FIX, modelo GARCH(1,1) & Banco de México \\
+$\mathit{DIF}_t$ & Diferencial entre la TIIE a 28 días y la tasa de fondos federales & Banco de México y FRED \\
+$\mathit{CME}_t$ & Volumen mensual de futuros del peso en el CME (logaritmo) & CME Group \\
+$\mathit{VIX}_t$ & Índice de volatilidad implícita del S\&P 500 & Cboe \\
+$\mathit{COVID}_t$ & Variable dicotómica: 1 de marzo de 2020 a diciembre de 2021, 0 en otro caso & Elaboración propia \\
+\bottomrule
+\end{tabular}
+\nota{Elaboración propia.}
+\end{table}
 
-\section{Incorporación de viñetas}
+\section{Especificación del modelo}
 
-Finalmente, puedes crear \textit{bullets} o viñetas utilizando el comando "\textit{itemize}".
+\guia{Escribe las ecuaciones con el entorno \texttt{equation}, nunca como imagen. Colócalas centradas en su propio renglón y numéralas a la derecha entre paréntesis. Introdúcelas en el texto antes de que aparezcan, define cada símbolo inmediatamente después con «donde…» y refiérete a ellas por su número: «la ecuación (1)». En LaTeX, refiérete a ellas con \texttt{\textbackslash eqref\{etiqueta\}}.}
 
-\begin{itemize}
-    \item Primera viñeta
-    \item Segunda viñeta
-\end{itemize}
+La volatilidad condicional del tipo de cambio se estima con un modelo GARCH(1,1), cuya ecuación de varianza es la ecuación~\eqref{eq:garch}:
+\begin{equation}
+h_t = \omega + a\,\varepsilon_{t-1}^{2} + b\,h_{t-1}
+\label{eq:garch}
+\end{equation}
+donde $h_t$ es la varianza condicional del rendimiento del tipo de cambio FIX en el mes $t$, $\varepsilon_{t-1}$ es el choque del período anterior y $\omega$, $a$ y $b$ son parámetros por estimar ($\omega > 0$; $a, b \geq 0$). La volatilidad condicional es $\sigma_t^{FX} = \sqrt{h_t}$.
 
-O bien, puedes enumerar con el comando "\textit{enumerate}"
+La relación entre la volatilidad cambiaria y el volumen negociado se estima con la ecuación~\eqref{eq:modelo}:
+\begin{equation}
+\ln \mathit{VOL}_t = \alpha + \beta_1 \sigma_t^{FX} + \beta_2 \mathit{DIF}_t + \beta_3 \ln \mathit{CME}_t + \beta_4 \mathit{VIX}_t + \beta_5 \mathit{COVID}_t + \varepsilon_t
+\label{eq:modelo}
+\end{equation}
+donde $\alpha$ es la constante, $\beta_1, \ldots, \beta_5$ son los coeficientes por estimar y $\varepsilon_t$ es el término de error. Las variables se definen en la Tabla~\ref{tab:variables}. La ecuación~\eqref{eq:modelo} se estima para el período completo y para los subperíodos 2009--2015 y 2016--2022.
 
-\begin{enumerate}
-    \item Primera viñeta
-    \item Segunda viñeta
-\end{enumerate}
+\subsection{Numeración de las ecuaciones}
+
+\guia{Numera las ecuaciones de forma consecutiva en todo el documento —(1), (2), (3)…— o por capítulo —(1.1), (1.2)…—. Elige una sola forma y respétala. Las ecuaciones que solo se mencionan de paso no necesitan número. En LaTeX, \texttt{equation} numera de forma automática y \texttt{equation*} omite el número.}
+
+\section{Análisis de resultados}
+
+\guia{El análisis de resultados tiene tres apartados: (1) la descripción de lo que encontraste a partir de tu metodología; (2) el contraste de esos hallazgos con la literatura y tu marco teórico: en qué coinciden y en qué no; y (3) sus implicaciones de política pública o de regulación, según el tema.}
+
+\subsection{Descripción de los resultados}
+
+\guia{Describe lo que encontraste a partir de tu metodología: presenta las tablas o figuras de resultados e interpreta el signo, la magnitud y la significancia de los coeficientes relevantes. Reporta los resultados en tablas de elaboración propia, nunca como capturas de pantalla del software.}
+
+La Tabla~\ref{tab:resultados} presenta los resultados de la estimación de la ecuación~\eqref{eq:modelo}.
+
+\begin{table}[H]
+\caption{Resultados de la estimación del volumen de futuros del dólar en el MexDer}
+\label{tab:resultados}
+\small\setstretch{1.1}
+\begin{tabular}{@{}lcccccc@{}}
+\toprule
+ & \multicolumn{2}{c}{2009--2022} & \multicolumn{2}{c}{2009--2015} & \multicolumn{2}{c}{2016--2022} \\
+\cmidrule(lr){2-3}\cmidrule(lr){4-5}\cmidrule(l){6-7}
+Variable & Coef. & Valor-$p$ & Coef. & Valor-$p$ & Coef. & Valor-$p$ \\
+\midrule
+Constante & 9.812 & 0.000 & 9.405 & 0.000 & 10.127 & 0.000 \\
+$\sigma_t^{FX}$ & 0.027 & 0.004 & 0.042 & 0.001 & 0.011 & 0.214 \\
+$\mathit{DIF}_t$ & 0.065 & 0.031 & 0.081 & 0.012 & 0.038 & 0.187 \\
+$\ln \mathit{CME}_t$ & $-$0.284 & 0.009 & $-$0.142 & 0.098 & $-$0.351 & 0.003 \\
+$\mathit{VIX}_t$ & 0.008 & 0.046 & 0.012 & 0.020 & 0.005 & 0.311 \\
+$\mathit{COVID}_t$ & $-$0.096 & 0.157 & --- & --- & $-$0.088 & 0.204 \\
+\midrule
+$R^2$ ajustado & \multicolumn{2}{c}{0.71} & \multicolumn{2}{c}{0.64} & \multicolumn{2}{c}{0.58} \\
+Observaciones & \multicolumn{2}{c}{168} & \multicolumn{2}{c}{84} & \multicolumn{2}{c}{84} \\
+\bottomrule
+\end{tabular}
+\nota{Elaboración propia con datos del Banco de México, el MexDer y el CME Group. Variable dependiente: logaritmo del volumen mensual de futuros del dólar en el MexDer. Errores estándar robustos de Newey-West. Cifras ilustrativas.}
+\end{table}
+
+En el subperíodo 2009–2015, un aumento de un punto porcentual en la volatilidad condicional del tipo de cambio se asocia con un incremento de 4.2\% en el volumen de futuros del dólar ($\beta_1 = 0.042$, $p < 0.01$). En el subperíodo 2016–2022 el coeficiente se reduce a 0.011 y deja de ser significativo, mientras que el volumen de futuros del peso en el CME se relaciona negativamente con la actividad del MexDer ($\beta_3 = -0.351$, $p < 0.01$). El diferencial de tasas también pierde significancia en el segundo subperíodo.
+
+\subsection{Contraste con la literatura y el marco teórico}
+
+\guia{Compara tus hallazgos con lo que dicen la literatura y tu marco teórico: en qué coinciden, en qué no y por qué podría ser. Cita a los autores con los que contrastas: este apartado conecta el Capítulo 3 con el Capítulo 1.}
+
+El efecto positivo de la volatilidad sobre el volumen negociado entre 2009 y 2015 coincide con la teoría de la cobertura: cuando aumenta el riesgo cambiario, los agentes expuestos demandan más contratos de futuros para reducir la varianza de su posición \parencite{johnson1960,ederington1979}. En cambio, la pérdida de significancia después de 2016 no se explica dentro de ese marco, que supone implícitamente que la cobertura se realiza en el mercado local. El coeficiente negativo del volumen en el CME sugiere que la demanda de cobertura no desapareció, sino que se trasladó a otros mercados, en un mercado cambiario global que opera mayoritariamente fuera de bolsa \parencite{bis2022}. Este resultado matiza la teoría: la relación entre volatilidad y volumen depende también de la competencia entre mercados.
+
+\subsection{Implicaciones de política pública y regulación}
+
+\guia{Explica qué implican tus resultados para la política pública o la regulación (o para las decisiones de empresas, bancos o inversionistas, según el tema). Las recomendaciones deben desprenderse de tus resultados, no de opiniones generales, y dirigirse a actores concretos.}
+
+Los resultados sugieren que la política financiera debería orientarse a la competitividad del mercado local de derivados más que a promover el uso de coberturas, cuya demanda ya existe. Para las autoridades financieras (Banco de México, Comisión Nacional Bancaria y de Valores y Secretaría de Hacienda y Crédito Público), las acciones posibles incluyen revisar los costos de transacción y los requisitos de margen frente a los de mercados externos, facilitar el acceso de inversionistas extranjeros y fortalecer el esquema de formadores de mercado. Un mercado local con mayor liquidez reduce la dependencia de contrapartes del exterior y mejora la formación de precios del peso.

@@ -1,132 +1,85 @@
 \documentclass[12pt,letterpaper,oneside]{report}
-%Puedes verificar todas las especificaciones de este documento en thesis.sty
+% Todo el formato (APA 7, márgenes, títulos, índices) está en thesis.sty
 \usepackage{thesis}
-  
-  
-\usepackage{atbegshi}
-\AtBeginDocument{\AtBeginShipoutNext{\AtBeginShipoutDiscard}}
 
-
-
+% Los recuadros grises «Guía» y las etiquetas de la introducción y las conclusiones
+% son instrucciones. Para ocultarlos todos en tu versión final, quita el % de la línea siguiente:
+% \mostrarguiasfalse
 
 \begin{document}
 
-\include{Portada}
+% ================= PORTADA =================
+\input{Portada}
 
-\normalsize
-
-
-%AGREGA CAPÍTULOS E ÍNDICE
-
-
-
+% ================= PRELIMINARES (números romanos; la portada cuenta como I pero no se muestra) =================
 \pagenumbering{roman}
-\normalsize
+\setcounter{page}{2}
 
-\chapter*{\centerline{AGRADECIMIENTOS}}\label{chapter:agradecimientos}
-%\setcounter{page}{0}
-\pagenumbering{roman}
+% Hojas institucionales: sustituye cada una por el PDF firmado, por ejemplo:
+% \includepdf[pages=1]{Formatos/SIP-13.pdf}
+\hojainstitucional{Acta de Registro de Tema de Tesis y Designación de Directores de Tesis}
+  {[Inserta aquí el formato SIP-13 firmado y escaneado, a página completa]}
+\hojainstitucional{Acta de Revisión de Tesis}
+  {[Inserta aquí el formato SIP-14 firmado por la Comisión Revisora, a página completa]}
+\hojainstitucional{Carta Cesión de Derechos}
+  {[Inserta aquí la Carta Cesión de Derechos firmada, a página completa]\\[6pt]
+   Verifica con la Coordinación de Posgrado de la ESE la versión vigente de cada formato.}
+
+\hojainstitucional{Dedicatoria}{}
+\input{Capítulos/Dedicatoria}
+
+\hojainstitucional{Agradecimientos}{}
 \input{Capítulos/Agradecimientos}
-\pagebreak
 
-\phantomsection
-\setcounter{tocdepth}{2}    % Sets maximum depth of Table Of Contents
-\renewcommand{\contentsname}{INDICE}
-\tableofcontents
+% Índices (se actualizan solos al compilar)
+\clearpage
+{\setstretch{1.1}\tableofcontents}
 
-\renewcommand{\listfigurename}{ÍNDICE DE FIGURAS}
-\renewcommand{\listtablename}{ÍNDICE DE TABLAS}
-
-\clearpage \phantomsection
-\addcontentsline{toc}{chapter}{\listfigurename}
-\listoffigures
-\pagebreak
-
-
-\clearpage \phantomsection
+\clearpage\phantomsection
 \addcontentsline{toc}{chapter}{\listtablename}
 \listoftables
-\pagebreak
 
+\clearpage\phantomsection
+\addcontentsline{toc}{chapter}{\listfigurename}
+\listoffigures
 
-\addcontentsline{toc}{chapter}{GLOSARIO}
-\chapter*{\centerline{GLOSARIO}}\label{chapter:GLOSARIO}
-\input{Capítulos/GLOSARIO}
-\pagebreak
-
-
-
-\addcontentsline{toc}{chapter}{ABREVIACIONES}
-\chapter*{\centerline{ABREVIACIONES}}\label{chapter:ABREVIACIONES}
-%\setcounter{page}{0}
-%\renewcommand{\thechapter}{\roman{chapter}}
-\input{Capítulos/ABREVIACIONES}
-\pagebreak
-
-\addcontentsline{toc}{chapter}{RESUMEN}
-\chapter*{\centerline{RESUMEN}}\label{chapter:RESUMEN}
-%\setcounter{page}{0}
-%\renewcommand{\thechapter}{\roman{chapter}}
+\apartado{Resumen}
 \input{Capítulos/RESUMEN}
-\pagebreak
 
-\addcontentsline{toc}{chapter}{ABSTRACT}
-\chapter*{\centerline{ABSTRACT}}\label{chapter:Abstract}
-%\setcounter{page}{0}
-%\renewcommand{\thechapter}{\roman{chapter}}
+\apartado{Abstract}
 \input{Capítulos/ABSTRACT}
-\pagebreak
 
-\addcontentsline{toc}{chapter}{INTRODUCCIÓN}
-\chapter*{INTRODUCCIÓN}\label{chapter:Introducción}
-%\onehalfspacing
-\setcounter{page}{0}
-\pagenumbering{arabic}
+\apartado{Glosario}
+\input{Capítulos/GLOSARIO}
+
+\apartado{Siglas}
+\input{Capítulos/SIGLAS}
+
+\apartado{Introducción}
 \input{Capítulos/Introducción}
-\pagebreak
 
+% ================= CUERPO (números arábigos desde el Capítulo 1) =================
+\clearpage
+\pagenumbering{arabic}
 
-\addcontentsline{toc}{chapter}{CAPÍTULO 1. AÑADE CAPÍTULOS Y SUBCAPÍTULOS}
-\chapter*{CAPÍTULO 1. CAPÍTULOS Y SUBCAPÍTULOS}\label{chapter:Capítulo1}
-\onehalfspacing
-%\setcounter{page}{0}
-%\pagenumbering{arabic}
-\input{Capítulos/Capitulo1.tex}
+\chapter{Marco teórico}
+\input{Capítulos/Capitulo1}
 
-\addcontentsline{toc}{chapter}{CAPÍTULO 2. AÑADE ECUACIONES, FIGURAS Y TABLAS}
-\chapter*{CAPÍTULO 2. ECUACIONES, FIGURAS Y TABLAS}\label{chapter:Capítulo2}
-\setcounter{chapter}{2}
-\setcounter{section}{0}
-\onehalfspacing
-%\setcounter{page}{0}
-%\pagenumbering{arabic}
+\chapter{Marco contextual: el mercado de derivados en México}
 \input{Capítulos/Capitulo2}
 
-\addcontentsline{toc}{chapter}{CAPÍTULO 3. CITAR CORRECTAMENTE}
-\chapter*{CAPÍTULO 3. CITAR CORRECTAMENTE}\label{chapter:Capítulo3}
-\setcounter{chapter}{3}
-\setcounter{section}{0}
-\onehalfspacing
-%\setcounter{page}{0}
-%\pagenumbering{arabic}
+\chapter{Metodología y análisis de resultados}
 \input{Capítulos/Capitulo3}
 
-\addcontentsline{toc}{chapter}{CONCLUSIONES}
-\chapter*{CONCLUSIONES}\label{chapter:Conclusiones}
-%\setcounter{page}{0}
+\apartado{Conclusiones}
 \input{Capítulos/Conclusiones}
 
+% ================= FINALES =================
+\apartado{Referencias}
+\guia{Orden alfabético por apellido del primer autor, con sangría francesa e interlineado igual al del texto. Se generan solas con biblatex a partir de \texttt{referencias.bib}: solo aparecen las obras que citas en el texto.}
+\printbibliography[heading=none]
 
+\apartado{Anexos}
+\input{Capítulos/Anexos}
 
-
-
-%\chapter*{REFERENCIAS}
-\printbibliography[title={REFERENCIAS}]
-\addcontentsline{toc}{chapter}{REFERENCIAS}
-%\chapter*{\centerline{REFERENCIAS}}\label{chapter:referencias}
-
-%\input{Referencias}
-%\bibliographystyle{}
-
-\pagebreak
-\end{document} 
+\end{document}
